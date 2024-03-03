@@ -1,0 +1,41 @@
+<div class="home-container">
+  <header>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+
+        <div class="user-details">
+          <div class="first-name">John</div>
+          <div class="username">here is email</div>
+        </div>
+      </div>
+
+      <div class="navbar-menu">
+        <button class="signout-button">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <article class="chat-list">
+    <app-chat-item
+      *ngFor="let msg of messages; let i = index"
+      [itemData]="msg"
+      [index]="i"
+      (deleteChat)="deleteMessage($event)"
+    ></app-chat-item>
+  </article>
+
+  <footer>
+    <div class="message-input-container">
+      <input
+        type="text"
+        id="messageInput"
+        name="messageInput"
+        [(ngModel)]="messageInput"
+        (keydown.enter)="onEnterKeyPressed()"
+        placeholder="Enter your message..."
+      />
+      <button id="sendButton" (click)="onSendClick()">Send</button>
+    </div>
+  </footer>
+</div>
