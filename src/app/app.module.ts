@@ -7,21 +7,28 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ChatItemComponent } from './pages/chat-item/chat-item.component';
+import { HomeService } from './services/home.service';
+import { SigninComponent } from './pages/signin/signin.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     HomeComponent,
-    ChatItemComponent
+    ChatItemComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,/* ngModel */
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    HomeService,
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })

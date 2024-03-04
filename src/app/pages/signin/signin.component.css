@@ -1,46 +1,50 @@
 /* body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-  } */
-  
-  .signup-container {
-    font-family: 'Arial', sans-serif;
-    max-width: fit-content;
-    margin: 50px auto;
+  }
+   */
+  .signin-container {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 100px auto;
     padding: 30px;
     background-color: #f5f5f5;
     border-radius: 30px;
-    justify-content: center;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   h2 {
     text-align: center;
-    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-top: 20px;
   }
   
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   
   label {
+    display: block;
     font-weight: bold;
   }
   
   input[type="text"],
   input[type="password"] {
-    width: calc(100% - 0px);
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
   button {
-    width: calc(100% - 0px);
-    margin: 15px 0;
+    width: 100%;
     padding: 12px;
+    margin: 15px 0;
     background-color: #007bff;
     color: #fff;
     border: none;

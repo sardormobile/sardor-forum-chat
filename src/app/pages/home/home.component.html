@@ -16,8 +16,14 @@
     </nav>
   </header>
 
-  <article class="chat-list">
+  <article
+    class="chat-list"
+    id="msgContainer"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight"
+  >
     <app-chat-item
+      #chatItems
       *ngFor="let msg of messages; let i = index"
       [itemData]="msg"
       [index]="i"
