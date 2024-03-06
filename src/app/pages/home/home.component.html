@@ -26,7 +26,7 @@
       #chatItems
       *ngFor="let msg of messages; let i = index"
       [itemData]="msg"
-      [index]="i"
+      [postId]="msg.postId"
       (deleteChat)="deleteMessage($event)"
     ></app-chat-item>
   </article>

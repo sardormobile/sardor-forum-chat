@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { ForumApiService } from '../../services/api/forum-api.service';
+import { ForumApiService } from '../../services/api/forum-post-api.service';
 import { error } from 'console';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ForumItemModel } from '../../services/api/models/forum-item-model';
 
 @Component({
   selector: 'app-home',
@@ -22,31 +23,35 @@ export class HomeComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private forumApiService: ForumApiService
   ) {
-    this.messages = service.getAllMessages();
+    this.messages = [];
     /* this.scrollToBottom(); */
   }
   ngOnInit(): void {
-    this.forumApiService.getAllForumContent()
+    this.forumApiService.getAllPosts()
     .subscribe({
       next: (data) => {
+        this.messages = data;
         console.log(data);
-      },
-      /* error: (error: HttpErrorResponse) => {
-        if (error instanceof ErrorEvent) {
-          console.error(`An error occured:${error.message}`);
-        } else {
-          console.log(`Server returned status code ${error.status}, error message: ${error.message}`);
-        }
-      } */
+      }
     });
   }
   
   onSendClick(): void {
-    this.messages.push({
-      "username": "john.hanios@gmail.com",
-      "message": this.messageInput,
+    const sendingPost: ForumItemModel = {
+      userId: 302,
+      message: this.messageInput
+    }
+    this.forumApiService.createPost(sendingPost)
+    .subscribe({
+      next: (res) => {
+        this.scrollToBottom();
+      }
+    });
+    /* this.messages.push({
+      userId: 302,
+      message: this.messageInput,
     })
-    this.scrollToBottom();
+    this.scrollToBottom(); */
   }
 
   //keyboard click listener
@@ -59,9 +64,17 @@ export class HomeComponent implements OnInit {
     this.scrollToBottom();
   }
   //delete message
-  deleteMessage(index: number): void {
-    this.service.deleteMessage(index);
-    this.cdr.detectChanges();
+  deleteMessage(postId: number): void {
+    console.log("delete postId: " + postId);
+    this.forumApiService.deletePstById(postId)
+    .subscribe({
+      next: (res) => {
+        this.scrollToBottom();
+        console.log(res);
+      }
+    }) 
+    /* this.service.deleteMessage(index);
+    this.cdr.detectChanges(); */
   }
 
   //scroll to bottom

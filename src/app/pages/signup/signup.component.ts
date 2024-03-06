@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ForumApiService } from '../../services/api/forum-api.service';
+import { ForumApiService } from '../../services/api/forum-post-api.service';
 import { UserDataModel } from '../../services/api/models/user-data-model';
+import { Router } from '@angular/router';
+import { RegisterApiService } from '../../services/api/register-api.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +18,8 @@ export class SignupComponent {
   confirmPassword: string = '';
 
   constructor(
-    private forumApiService: ForumApiService
+    private registerApiService: RegisterApiService,
+    private router: Router
   ) {}
   
   onSubmit() : void {
@@ -27,11 +30,18 @@ export class SignupComponent {
         username: this.username,
         password: this.password,
       }
-      this.forumApiService.signUp(newUser)
+      this.registerApiService.signUp(newUser)
       .subscribe({
         next: (result) => {
+          if(result) {
+            this.router.navigate(['home']);
+          }
           console.log(`SignUp result: ${result}`);
-        }
+        },
+        error: error => {
+          /* this.errorMessage = error.message; */
+          console.error('There was an signUp error!', error);
+      }
       });
     } else {
       console.log('Confirm password is incorrect');

@@ -6,6 +6,10 @@ import { SigninComponent } from './pages/signin/signin.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: SignupComponent
+  },
+  {
     path: 'home',
     component: HomeComponent
   },

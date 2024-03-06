@@ -10,12 +10,12 @@ export class ChatItemComponent {
   @Input()
   itemData: any = {};
   @Input()
-  index: number = -1;
+  postId: number = -1;
 
   @Output()
   deleteChat: EventEmitter<number> = new EventEmitter<number>(); 
   
   onDeleteChat(): void {
-    this.deleteChat.emit(this.index);
+    this.deleteChat.emit(this.postId);
   }
 }
