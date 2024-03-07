@@ -1,0 +1,20 @@
+<div class="coment-container">
+  <div class="coment-item">
+    <div class="user-info">
+      <img src="/assets/img/image1.png" alt="User Logo" class="user-logo" />
+      <div class="user-details">
+        <div class="user-name">{{ commentItemData.commentId }}</div>
+        <div class="send-date">March 10, 2024</div>
+      </div>
+    </div>
+    <div class="coment-content">
+      {{ commentItemData.message }}
+    </div>
+    <div class="actions">
+      <!-- <button class="edit-button">Edit</button> -->
+      <button class="delete-commit-button" (click)="onDeleteCommit()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

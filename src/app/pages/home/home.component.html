@@ -1,38 +1,37 @@
 <div class="home-container">
-  <header>
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+  <div class="post-container">
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
 
-        <div class="user-details">
-          <div class="first-name">John</div>
-          <div class="username">here is email</div>
+          <div class="user-details">
+            <div class="first-name">John</div>
+            <div class="username">here is email</div>
+          </div>
         </div>
-      </div>
 
-      <div class="navbar-menu">
-        <button class="signout-button">Sign Out</button>
-      </div>
-    </nav>
-  </header>
+        <div class="navbar-menu">
+          <button class="signout-button">Sign Out</button>
+        </div>
+      </nav>
+    </header>
 
-  <article
-    class="chat-list"
-    id="msgContainer"
-    #scrollMe
-    [scrollTop]="scrollMe.scrollHeight"
-  >
-    <app-chat-item
-      #chatItems
-      *ngFor="let msg of messages; let i = index"
-      [itemData]="msg"
-      [postId]="msg.postId"
-      (deleteChat)="deleteMessage($event)"
-    ></app-chat-item>
-  </article>
+    <article
+      class="chat-list"
+      #scrollChat
+      [scrollTop]="scrollChat.scrollHeight"
+    >
+      <app-chat-item
+        #postItem
+        *ngFor="let msg of messages; let i = index"
+        [itemData]="msg"
+        (deleteChat)="deleteMessage($event)"
+        (openComment)="openCommentPage($event)"
+      ></app-chat-item>
+    </article>
 
-  <footer>
-    <div class="message-input-container">
+    <footer class="message-input-container">
       <input
         type="text"
         id="messageInput"
@@ -42,6 +41,6 @@
         placeholder="Enter your message..."
       />
       <button id="sendButton" (click)="onSendClick()">Send</button>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </div>

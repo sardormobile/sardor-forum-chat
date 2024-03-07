@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { CommentComponent } from './pages/comment/comment.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SignupComponent
+    component: HomeComponent
   },
   {
     path: 'home',
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent
+  },
+  {
+    path: "comment/:postId",
+    component: CommentComponent
   }
 ];
 

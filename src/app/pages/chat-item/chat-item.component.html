@@ -11,27 +11,16 @@
       {{ itemData.message }}
     </div>
     <div class="actions">
-      <button class="edit-button">Edit</button>
+      <!-- <button class="edit-button">Edit</button> -->
       <button class="delete-button" (click)="onDeleteChat()">Delete</button>
     </div>
-    <div class="comments">
-      <div class="comment">
-        <div class="user-info">
-          <img
-            src="/assets/img/image1.png"
-            alt="Coment User Logo"
-            class="comment-user-logo"
-          />
-          <div class="user-details">
-            <div class="user-name">Jane Smith</div>
-            <div class="send-date">March 11, 2024</div>
-          </div>
-        </div>
-        <div class="comment-content">
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia curae.
-        </div>
-      </div>
+    <div class="comments-count" (click)="onOpenCommentClick()">
+      <h4>Comments 0</h4>
+      <img
+        src="../../../assets/img/right_arrow.png"
+        alt=""
+        class="right-arrow"
+      />
     </div>
   </div>
 </div>

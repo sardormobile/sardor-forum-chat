@@ -1,18 +1,19 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ForumApiService } from '../../services/api/forum-post-api.service';
-import { error } from 'console';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ForumItemModel } from '../../services/api/models/forum-item-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit  {
 
+  @ViewChild('msgContainer')
+  msgContainer!: ElementRef;
 
   messageInput: string = '';
 
@@ -21,22 +22,43 @@ export class HomeComponent implements OnInit {
   constructor(
     private service: HomeService,
     private cdr: ChangeDetectorRef,
-    private forumApiService: ForumApiService
-  ) {
-    this.messages = [];
-    /* this.scrollToBottom(); */
-  }
+    private forumApiService: ForumApiService,
+    private router: Router, private cdref: ChangeDetectorRef 
+  ) {}
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+ }
+
   ngOnInit(): void {
-    this.forumApiService.getAllPosts()
+    this.messages = [];
+    this.getAllPostApiRequest();
+  }
+
+  
+  onSendClick(): void {
+    this.createPostApiRequest(); 
+  }
+
+  //keyboard click listener
+  onEnterKeyPressed() {
+    this.createPostApiRequest();
+  }
+  /* get all post request */
+  getAllPostApiRequest() {
+    return this.forumApiService.getAllPosts()
     .subscribe({
       next: (data) => {
         this.messages = data;
-        console.log(data);
       }
     });
   }
-  
-  onSendClick(): void {
+  /* new post requst */
+  createPostApiRequest() {
+    if (!this.messageInput) {
+      alert('the text field is empty');
+      return
+    }
     const sendingPost: ForumItemModel = {
       userId: 302,
       message: this.messageInput
@@ -44,50 +66,24 @@ export class HomeComponent implements OnInit {
     this.forumApiService.createPost(sendingPost)
     .subscribe({
       next: (res) => {
-        this.scrollToBottom();
+        if (res) {
+          this.getAllPostApiRequest();
+          this.messageInput = '';
+        }
       }
     });
-    /* this.messages.push({
-      userId: 302,
-      message: this.messageInput,
-    })
-    this.scrollToBottom(); */
   }
-
-  //keyboard click listener
-  onEnterKeyPressed() {
-    this.messages.push({
-      "username": "john.hanios@gmail.com",
-      "message": this.messageInput,
-    })
-    console.log(this.messageInput);
-    this.scrollToBottom();
-  }
-  //delete message
-  deleteMessage(postId: number): void {
-    console.log("delete postId: " + postId);
-    this.forumApiService.deletePstById(postId)
+   //delete message
+   deleteMessage(postId: number) {
+    this.forumApiService.deletePostById(postId)
     .subscribe({
-      next: (res) => {
-        this.scrollToBottom();
-        console.log(res);
+      next: () => {
+        this.getAllPostApiRequest();
       }
     }) 
-    /* this.service.deleteMessage(index);
-    this.cdr.detectChanges(); */
   }
-
-  //scroll to bottom
-  scrollToBottom(): void {
-    var container = document.getElementById("msgContainer");
-   if (container) {
-    // Scroll to the bottom of the container
-    container.scrollTop = container.scrollHeight; 
-    // Manually trigger change detection
-    this.cdr.detectChanges();
-  } else {
-    console.error("Message container element not found");
-  }
-  }
-   
+  //open commit
+  openCommentPage(postId: number) {
+    this.router.navigate(['comment', postId])
+  } 
 }

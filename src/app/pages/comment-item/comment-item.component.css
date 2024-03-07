@@ -1,17 +1,9 @@
-.chat-container {
-    max-width: 600px;
-    margin: 20px auto;
+.coment-container {
+    max-width: 800px;
+    margin: 20px 20px;
   }
-  .comments-count {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  .comments-count img{
-    width: 30px;
-    height: 30px;
-  }
-  .chat-item {
+ 
+  .coment-item {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -45,7 +37,7 @@
     color: #777;
   }
   
-  .chat-content {
+  .coment-content {
     margin-top: 10px;
   }
   
@@ -54,7 +46,7 @@
   }
   
   .edit-button,
-  .delete-button {
+  .delete-commit-button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -62,10 +54,4 @@
     border-radius: 4px;
     cursor: pointer;
     margin-right: 5px;
-  }
-  .comments-count  {
-    padding-top: 5px;
-    border-top: 1px solid #ddd;
-    margin-top: 20px;
-    align-items: center;
   }

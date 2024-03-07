@@ -10,6 +10,8 @@ import { ChatItemComponent } from './pages/chat-item/chat-item.component';
 import { HomeService } from './services/home.service';
 import { SigninComponent } from './pages/signin/signin.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommentComponent } from './pages/comment/comment.component';
+import { CommentItemComponent } from './pages/comment-item/comment-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     SignupComponent,
     HomeComponent,
     ChatItemComponent,
-    SigninComponent
+    SigninComponent,
+    CommentComponent,
+    CommentItemComponent
   ],
   imports: [
     BrowserModule,

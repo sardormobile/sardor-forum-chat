@@ -22,32 +22,42 @@ export class SignupComponent {
     private router: Router
   ) {}
   
-  onSubmit() : void {
-    if (this.password === this.confirmPassword) {
-      const newUser: UserDataModel = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        username: this.username,
-        password: this.password,
-      }
-      this.registerApiService.signUp(newUser)
+  onSubmit(): void {
+    // Check if any of the fields are empty
+    if (!this.username || !this.firstName || !this.lastName || !this.password || !this.confirmPassword) {
+      console.log('All fields are required');
+      alert('All fields are required');
+      return;
+    }
+  
+    // Check if passwords match
+    if (this.password !== this.confirmPassword) {
+      console.log('Confirm password is incorrect');
+      alert('Confirm password is incorrect');
+      return;
+    }
+  
+    // If all fields are filled and passwords match, proceed with sign up
+    const newUser: UserDataModel = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      username: this.username,
+      password: this.password,
+    };
+  
+    this.registerApiService.signUp(newUser)
       .subscribe({
         next: (result) => {
-          if(result) {
+          if (result) {
             this.router.navigate(['home']);
           }
           console.log(`SignUp result: ${result}`);
         },
         error: error => {
-          /* this.errorMessage = error.message; */
-          console.error('There was an signUp error!', error);
-      }
+          console.error('There was a signUp error!', error);
+        }
       });
-    } else {
-      console.log('Confirm password is incorrect');
-      alert('Confirm password is incorrect');
-    }
-    console.log(this.firstName);
   }
+  
   
 }

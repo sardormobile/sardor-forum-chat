@@ -12,10 +12,11 @@ export class ForumApiService {
   ) { }
 
   createPost(post: ForumItemModel) {
+    console.log(`${post.userId}, ${post.message}`);
     return this.http.post<ForumItemModel>(CREATE_POST_URL, post);
   }
-  deletePstById(postId: Number) {
-    return this.http.delete(`/${DELETE_POST_URL}/postId:${postId}`);
+  deletePostById(postId: Number) {
+    return this.http.delete(`${DELETE_POST_URL}/${postId}`);
   }
   getAllPosts() {
     return this.http.get<Array<ForumItemModel>>(ALL_POSTS_URL);

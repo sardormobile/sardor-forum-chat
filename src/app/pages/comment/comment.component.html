@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="topbar">
+    <h2 class="title">Comments {{ paramPostId }}</h2>
+  </div>
+  <app-comment-item
+    #commentItem
+    *ngFor="let itemData of comments"
+    [commentItemData]="itemData"
+    (deleteCommit)="onDeleteCommit($event)"
+  ></app-comment-item>
+  <!-- Input box for new message -->
+  <div class="input-container">
+    <input
+      type="text"
+      class="message-input"
+      [(ngModel)]="inputComment"
+      placeholder="Type your comment here..."
+    />
+    <button id="sendButton" (click)="onSendClick()" class="sendButton">
+      Senddd
+    </button>
+  </div>
+</div>
