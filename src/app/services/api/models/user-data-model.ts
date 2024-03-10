@@ -4,6 +4,7 @@ export interface UserDataModel {
     username?: string,
     password?: string,
     confirmPassword?: string,
+    token?: string,
     /* response */
     userId?: number
 }
