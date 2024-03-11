@@ -38,8 +38,7 @@ export class RegisterApiService {
         }
       }),
       catchError((error: HttpErrorResponse ) => {
-        console.error('There was a signUp error!', error.error); 
-        return throwError(error);
+        return throwError(`There was a signIn error!: ${error}`);
       })
     );
   }
