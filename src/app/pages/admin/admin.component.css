@@ -1,4 +1,11 @@
-.signin-container {
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+   */
+   .signin-container {
     font-family: Arial, sans-serif;
     max-width: 400px;
     margin: 100px auto;

@@ -3,19 +3,24 @@
     <div class="user-info">
       <img src="/assets/img/image1.png" alt="User Logo" class="user-logo" />
       <div class="user-details">
-        <div class="user-name">{{ itemData.username }}</div>
-        <div class="send-date">March 10, 2024</div>
+        <div class="user-name">userId: {{ itemData.userId }}</div>
+        <div class="name">name: {{ itemData.firstName }}</div>
+        <div class="username">username: {{ itemData.username }}</div>
+        <div class="send-date">
+          {{ itemData.createdDate | date : "dd/MM/yyyy HH:mm" }}
+        </div>
       </div>
     </div>
     <div class="chat-content">
+      <div>PostMessage:&nbsp;&nbsp;</div>
       {{ itemData.message }}
     </div>
-    <div class="actions">
+    <div class="actions" *ngIf="currentRole || itemData.userId === userId">
       <!-- <button class="edit-button">Edit</button> -->
       <button class="delete-button" (click)="onDeleteChat()">Delete</button>
     </div>
     <div class="comments-count" (click)="onOpenCommentClick()">
-      <h4>Comments 0</h4>
+      <h4>Comments</h4>
       <img
         src="../../../assets/img/right_arrow.png"
         alt=""

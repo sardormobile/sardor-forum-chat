@@ -40,6 +40,12 @@
   .user-details {
     font-weight: bold;
   }
+  .chat-content {
+    display: flex;
+  }
+  .chat-content div {
+    font-weight: bold;
+  }
   
   .send-date {
     color: #777;

@@ -1,46 +1,25 @@
-<div class="home-container">
-  <div class="post-container">
-    <header>
-      <nav class="navbar">
-        <div class="navbar-brand">
-          <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+<div class="post-container">
+  <article class="chat-list" #scrollChat [scrollTop]="scrollChat.scrollHeight">
+    <app-chat-item
+      #postItem
+      *ngFor="let postData of messages; let i = index"
+      [itemData]="postData"
+      [userId]="userId"
+      [userRole]="userRole"
+      (deleteChat)="deleteMessage($event)"
+      (openComment)="openCommentPage($event.postId, $event.postMessage)"
+    ></app-chat-item>
+  </article>
 
-          <div class="user-details">
-            <div class="first-name">John</div>
-            <div class="username">here is email</div>
-          </div>
-        </div>
-
-        <div class="navbar-menu">
-          <button class="signout-button">Sign Out</button>
-        </div>
-      </nav>
-    </header>
-
-    <article
-      class="chat-list"
-      #scrollChat
-      [scrollTop]="scrollChat.scrollHeight"
-    >
-      <app-chat-item
-        #postItem
-        *ngFor="let msg of messages; let i = index"
-        [itemData]="msg"
-        (deleteChat)="deleteMessage($event)"
-        (openComment)="openCommentPage($event)"
-      ></app-chat-item>
-    </article>
-
-    <footer class="message-input-container">
-      <input
-        type="text"
-        id="messageInput"
-        name="messageInput"
-        [(ngModel)]="messageInput"
-        (keydown.enter)="onEnterKeyPressed()"
-        placeholder="Enter your message..."
-      />
-      <button id="sendButton" (click)="onSendClick()">Send</button>
-    </footer>
-  </div>
+  <footer class="message-input-container" *ngIf="signout_button">
+    <input
+      type="text"
+      id="messageInput"
+      name="messageInput"
+      [(ngModel)]="messageInput"
+      (keydown.enter)="onEnterKeyPressed()"
+      placeholder="Enter your message..."
+    />
+    <button id="sendButton" (click)="onSendClick()">Send</button>
+  </footer>
 </div>

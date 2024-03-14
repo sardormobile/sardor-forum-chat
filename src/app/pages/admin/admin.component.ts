@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { UserDataModel } from '../../services/api/models/user-data-model';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css'
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.css'
 })
-export class SigninComponent {
+export class AdminComponent {
   
-  constructor(private register: RegisterApiService,
+  constructor(
+    private register: RegisterApiService,
     private router: Router) {}
   username: string = '';
   password: string = '';

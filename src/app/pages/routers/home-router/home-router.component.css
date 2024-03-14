@@ -1,0 +1,88 @@
+  .home-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .navbar-links li {
+    float: left;
+  }
+  .navbar-links li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar-links li a:hover {
+    background-color: #75b5fa;
+    color: black;
+  }
+  
+   .navbar-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+    background-color: #ddd;
+  }
+  .navbar {
+    background-color: #ddd;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .navbar button {
+    margin: 10px;
+    padding: 5px 10px;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  .register-container {
+    display: flex;
+  }
+ 
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .first-name {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .username, .userId {
+    font-size: 1em;
+    opacity: 0.9;
+    color: #333;
+  }
+  
+  .signout-button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .signout-button:hover {
+    background-color: #ddd;
+  }

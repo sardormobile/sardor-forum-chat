@@ -47,14 +47,14 @@ export class SignupComponent {
   
     this.registerApiService.signUp(newUser)
       .subscribe({
-        next: (result) => {
-          if (result) {
+        next: (res) => {
+          if (res) {
             this.router.navigate(['home']);
           }
-          console.log(`SignUp result: ${result}`);
+          console.log('SignUp successful:', res);
         },
-        error: error => {
-          console.error('There was a signUp error!', error);
+        error: (error) => {
+          console.error('SignUp error:', error);
         }
       });
   }

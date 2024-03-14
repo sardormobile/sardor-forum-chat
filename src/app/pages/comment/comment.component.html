@@ -1,15 +1,29 @@
 <div class="container">
   <div class="topbar">
-    <h2 class="title">Comments {{ paramPostId }}</h2>
+    <a (click)="goBack()">
+      <img
+        src="../../../assets/img/right_arrow.png"
+        alt="Back Button"
+        id="backButton"
+      />
+    </a>
+    <h2 class="title">PostId: {{ paramPostId }}</h2>
   </div>
-  <app-comment-item
-    #commentItem
-    *ngFor="let itemData of comments"
-    [commentItemData]="itemData"
-    (deleteCommit)="onDeleteCommit($event)"
-  ></app-comment-item>
+
+  <h1 class="post">Post: {{ queryParam }}</h1>
+
+  <div class="comments-list">
+    <app-comment-item
+      #commentItem
+      *ngFor="let itemData of comments"
+      [commentItemData]="itemData"
+      [userId]="userId"
+      [userRole]="userRole"
+      (deleteCommit)="onDeleteCommit($event)"
+    ></app-comment-item>
+  </div>
   <!-- Input box for new message -->
-  <div class="input-container">
+  <div class="input-container" *ngIf="input_container">
     <input
       type="text"
       class="message-input"

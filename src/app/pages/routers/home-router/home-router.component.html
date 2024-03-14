@@ -1,0 +1,40 @@
+<div class="home-container">
+  <header>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+
+        <div class="user-details">
+          <div class="first-name">Name:{{ name }}</div>
+          <div class="username">Username: {{ username }}</div>
+          <div class="userId">UserId: {{ userId }}</div>
+          <div class="userId">role: {{ userRole }}</div>
+        </div>
+      </div>
+      <ul class="navbar-links">
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/home/about">About</a></li>
+        <li><a routerLink="/home/signin">Services</a></li>
+        <li><a routerLink="/home/about">About</a></li>
+        <li><a routerLink="/home/contact">Blog</a></li>
+        <li><a routerLink="/home/signin">Services</a></li>
+        <li><a routerLink="/home/about">About</a></li>
+        <li><a routerLink="/home/contact">Blog</a></li>
+      </ul>
+      <div class="navbar-end">
+        <div *ngIf="signout_button" class="signout_button">
+          <button class="signout-button" (click)="logOutClick()">
+            SignOut
+          </button>
+        </div>
+
+        <div class="register-container" *ngIf="register_container">
+          <button class="signin-button" (click)="signInClick()">SignIn</button>
+          <button class="signup-button" (click)="signUpClick()">SignUp</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <router-outlet class="home-content"></router-outlet>
+</div>
