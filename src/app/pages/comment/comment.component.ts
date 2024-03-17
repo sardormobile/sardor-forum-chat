@@ -75,7 +75,7 @@ export class CommentComponent implements OnInit {
     const newComment: ForumCommentModel = {
       postId: this.paramPostId,
       userId: this.userId,
-      comment: this.inputComment
+      message: this.inputComment
     }
     this.commentApiService.createComment(newComment)
     .subscribe({

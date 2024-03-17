@@ -3,7 +3,7 @@
     <div class="user-info">
       <img src="/assets/img/image1.png" alt="User Logo" class="user-logo" />
       <div class="user-details">
-        <div class="user-name">userId: {{ itemData.userId }}</div>
+        <div class="user-name">postId: {{ itemData.postId }}</div>
         <div class="name">name: {{ itemData.firstName }}</div>
         <div class="username">username: {{ itemData.username }}</div>
         <div class="send-date">
@@ -20,7 +20,7 @@
       <button class="delete-button" (click)="onDeleteChat()">Delete</button>
     </div>
     <div class="comments-count" (click)="onOpenCommentClick()">
-      <h4>Comments</h4>
+      <h4>Comments {{ itemData.commentsCount }}</h4>
       <img
         src="../../../assets/img/right_arrow.png"
         alt=""
