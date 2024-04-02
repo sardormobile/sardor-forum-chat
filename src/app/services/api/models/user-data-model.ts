@@ -3,6 +3,7 @@ export interface UserDataModel {
     lastName?: string,
     username?: string,
     password?: string,
+    role?: string,
     confirmPassword?: string,
     token?: string,
     /* response */

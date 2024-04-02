@@ -1,4 +1,10 @@
 <div class="post-container">
+  <div class="topic-title-container">
+    <h1>Topic: {{ topicName }}</h1>
+  </div>
+  <div class="empty-content" *ngIf="messages.length == 0">
+    <h2>There are no posts yet</h2>
+  </div>
   <article class="chat-list" #scrollChat [scrollTop]="scrollChat.scrollHeight">
     <app-chat-item
       #postItem
@@ -11,7 +17,7 @@
     ></app-chat-item>
   </article>
 
-  <footer class="message-input-container" *ngIf="signout_button">
+  <footer class="message-input-container" *ngIf="isHideInput">
     <input
       type="text"
       id="messageInput"

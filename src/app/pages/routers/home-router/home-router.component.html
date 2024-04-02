@@ -2,7 +2,9 @@
   <header>
     <nav class="navbar">
       <div class="navbar-brand">
-        <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+        <a routerLink="/home">
+          <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
+        </a>
 
         <div class="user-details">
           <div class="first-name">Name:{{ name }}</div>
@@ -12,14 +14,47 @@
         </div>
       </div>
       <ul class="navbar-links">
-        <li><a routerLink="/home">Home</a></li>
-        <li><a routerLink="/home/about">About</a></li>
-        <li><a routerLink="/home/signin">Services</a></li>
-        <li><a routerLink="/home/about">About</a></li>
-        <li><a routerLink="/home/contact">Blog</a></li>
-        <li><a routerLink="/home/signin">Services</a></li>
-        <li><a routerLink="/home/about">About</a></li>
-        <li><a routerLink="/home/contact">Blog</a></li>
+        <li *ngFor="let itemData of navItems; let i = index">
+          <a
+            (click)="onTabClick(i)"
+            [class.active-button]="i === activeTabIndex"
+          >
+            <!-- routerLink="/home/{{ itemData.title }}"  -->
+            {{ itemData.topic }}
+          </a>
+          <button
+            (click)="deleteItem(itemData.topic)"
+            *ngIf="isDelete && i != 0"
+            class="delete-button"
+          >
+            Delete
+          </button>
+        </li>
+        <a class="centered">
+          <img
+            src="/assets/img/add_icon.png"
+            mat-raised-button
+            (click)="openDialog()"
+            alt="Add"
+            class="add_icon"
+          />
+          <ng-container *ngIf="isDelete; else refreshIcon">
+            <img
+              src="/assets/img/refresh_icon.png"
+              alt="Refresh"
+              (click)="showNavItemDelete()"
+              class="refresh_icon"
+            />
+          </ng-container>
+          <ng-template #refreshIcon>
+            <img
+              src="/assets/img/delete_icon.png"
+              alt="Delete"
+              (click)="showNavItemDelete()"
+              class="delete_icon"
+            />
+          </ng-template>
+        </a>
       </ul>
       <div class="navbar-end">
         <div *ngIf="signout_button" class="signout_button">
@@ -27,14 +62,11 @@
             SignOut
           </button>
         </div>
-
         <div class="register-container" *ngIf="register_container">
           <button class="signin-button" (click)="signInClick()">SignIn</button>
-          <button class="signup-button" (click)="signUpClick()">SignUp</button>
         </div>
       </div>
     </nav>
   </header>
-
   <router-outlet class="home-content"></router-outlet>
 </div>

@@ -3,10 +3,10 @@ import { HomeService } from '../../services/home.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ForumApiService } from '../../services/api/forum-post-api.service';
 import { ForumItemModel } from '../../services/api/models/forum-item-model';
-import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_USER_ID_KEY } from '../../constants';
+import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_USER_DATA_KEY } from '../../constants';
 import { RegisterApiService } from '../../services/api/register-api.service';
 import { JwtDecoderService } from '../../services/jwt-decoder.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModel } from '../../services/api/models/user-data-model';
 
 
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit  {
   messages: Array<any> = [];
 
   signout_button: boolean = false;
+  isHideInput: boolean = false;
   register_container: boolean = true;
 
   userId: any = null;
@@ -38,7 +39,8 @@ export class HomeComponent implements OnInit  {
     private forumApiService: ForumApiService,
     private cdref: ChangeDetectorRef,
     private registerService: RegisterApiService,
-    private jwtDecodeToken: JwtDecoderService
+    private jwtDecodeToken: JwtDecoderService,
+    private activeRouter: ActivatedRoute
   ) {}
 
   ngAfterContentChecked() {
@@ -46,35 +48,44 @@ export class HomeComponent implements OnInit  {
  }
  decodetToken: any;
 
-  ngOnInit(): void {
-    
- 
+ topicName: string = '';
+ topicIdFk: number = -1;
 
-    //if (typeof localStorage !== 'undefined') {
+  ngOnInit(): void {
+    this.activeRouter.queryParams.subscribe(params => {
+      // Retrieve the value of 'pageArg' from the route parameters
+      this.topicIdFk = params['titleId'];
+      this.topicName = params['title'];
+      this.getAllPostApiRequest();
+    });
       const token = localStorage.getItem(LOCAL_STORAGE_KEY);
-      /* const userLocalId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY);
-      if (userLocalId) {
-        this.userId = userLocalId;
-      } */
+      const userDataString  = localStorage.getItem(LOCAL_STORAGE_USER_DATA_KEY);
+      if (userDataString !== null) {
+        const userData: UserDataModel = JSON.parse(userDataString);
+        this.userId = userData.userId;
+        this.userRole = userData.role;
+      }
       if (token) {
         this.signout_button = true;
+        this.isHideInput = true;
         this.register_container = false;
 
         this.decodetToken = this.jwtDecodeToken.decodeToken(token);
         
-        this.registerService.getUserByUsername(this.decodetToken.username)
+        /* this.registerService.getUserByUsername(this.decodetToken.username)
         .subscribe({
           next: (res) => {
               this.userId = res.userId;
               this.userRole = res.role;
           }
-        });
+        }); */
       } else {
         this.signout_button = false;
+        this.isHideInput = false;
         this.register_container = true;
       }
      
-    this.getAllPostApiRequest();
+   /*  this.getAllPostApiRequest(); */
     //}
   }
  
@@ -89,7 +100,24 @@ export class HomeComponent implements OnInit  {
   }
   /* get all post request */
   getAllPostApiRequest() {
+    if (this.topicName == 'Home') {
+      this.getAllHomePosts();
+      return;
+    }
+  this.getAllPostByTopicId();
+  }
+  /* get only home post */
+  getAllHomePosts() {
     this.forumApiService.getAllPosts()
+    .subscribe({
+      next: (data) => {
+        this.messages = data;
+      }
+    });
+  }
+  /* get posts by topicId */
+  getAllPostByTopicId() {
+    this.forumApiService.getAllPostsByTopicId(this.topicIdFk)
     .subscribe({
       next: (data) => {
         this.messages = data;
@@ -104,7 +132,8 @@ export class HomeComponent implements OnInit  {
     }
     const sendingPost: ForumItemModel = {
       userId: this.userId,
-      message: this.messageInput
+      message: this.messageInput,
+      topicIdFk: this.topicIdFk
     }
     this.forumApiService.createPost(sendingPost)
     .subscribe({
@@ -113,7 +142,10 @@ export class HomeComponent implements OnInit  {
           this.getAllPostApiRequest();
           this.messageInput = '';
         }
-      }
+      },
+      error(err) {
+        console.error('Error cerate new post:', err);
+      },
     });
   }
    //delete message
@@ -121,11 +153,11 @@ export class HomeComponent implements OnInit  {
     this.forumApiService.deletePostById(postId)
     .subscribe({
       next: () => {
-        console.log("deleteMsgId: " + postId)
         this.getAllPostApiRequest();
       }
-    }) 
+    });
   }
+  
   //open commit
   openCommentPage(postId: number, postMessage: string) {
     this.router.navigate(['posts', postId], {

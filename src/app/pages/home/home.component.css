@@ -13,7 +13,13 @@
   /* .comment-container {
     width: 40%;
   } */
-
+  .empty-content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .chat-list {
     width: 100%;
     height: 100vh;
@@ -22,7 +28,13 @@
     align-items: center;
     overflow-y: scroll;
   }
-
+  .topic-title-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+    margin-left: 10px;
+    /* margin: 10px auto; */
+  }
   article {
     flex-grow: 1;
     /* overflow-y: auto;  */
@@ -35,7 +47,7 @@
     padding: 10px 20px;
     margin: 10px 20px;
     border-top: 1px solid #ccc;
-    margin-bottom: 90px;
+    margin-bottom: 120px;
   }
   #messageInput {
     flex: 1;

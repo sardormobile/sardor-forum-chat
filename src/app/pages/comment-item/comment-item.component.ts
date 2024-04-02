@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Role } from '../../enums/roles.enum';
-import { LOCAL_STORAGE_USER_ID_KEY } from '../../constants';
+import { LOCAL_STORAGE_USER_DATA_KEY } from '../../constants';
+import { UserDataModel } from '../../services/api/models/user-data-model';
 
 @Component({
   selector: 'app-comment-item',
@@ -15,24 +16,20 @@ export class CommentItemComponent {
   commentItemData: any = {};
   
   @Input()
-  userId:any = null;
+  userData:UserDataModel = {};
   
-  @Input()
-  userRole:any = null;
+  currentRole: Role = Role.ADMIN
 
   ngOnInit() {
-    console.log("coment item userId: " + this.userId);
-    console.log("coment item userRole: " + this.userRole);
+    console.log("coment item commentItemData: " + this.commentItemData.role);
   }
 
-
-  currentRole: Role = Role.ADMIN
 
   @Output()
   deleteCommit: EventEmitter<number> = new EventEmitter<number>(); 
   onDeleteCommit(): void {
     this.deleteCommit.emit(this.commentItemData.commentId);
-    console.log(this.userId);
+    console.log(this.userData.userId);
   };
   
 }

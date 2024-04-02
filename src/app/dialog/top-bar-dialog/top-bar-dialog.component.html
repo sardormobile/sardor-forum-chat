@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Enter Text</h2>
+<mat-dialog-content>
+  <form #form="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Enter text"
+        [(ngModel)]="textInput"
+        name="textInput"
+        required
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="!form.valid"
+    (click)="onSubmit()"
+  >
+    OK
+  </button>
+</mat-dialog-actions>

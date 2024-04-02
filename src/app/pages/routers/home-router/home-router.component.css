@@ -28,6 +28,17 @@
     padding: 0;
     /* overflow: hidden; */
     background-color: #ddd;
+    display: flex;
+    align-items: center;
+  }
+  .centered {
+    margin-left: auto;
+  }
+  .centered img{
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+    cursor: pointer;
   }
   .navbar {
     background-color: #ddd;
@@ -48,8 +59,6 @@
   .register-container {
     display: flex;
   }
- 
-  
   .avatar {
     width: 40px;
     height: 40px;
@@ -85,4 +94,7 @@
   
   .signout-button:hover {
     background-color: #ddd;
+  }
+  .active-button {
+    border-bottom: 3px solid blueviolet;
   }

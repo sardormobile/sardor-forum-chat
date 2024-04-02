@@ -9,9 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { ChatItemComponent } from './pages/chat-item/chat-item.component';
 import { HomeService } from './services/home.service';
 import { SigninComponent } from './pages/signin/signin.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CommentComponent } from './pages/comment/comment.component';
 import { CommentItemComponent } from './pages/comment-item/comment-item.component';
+import { tokenInterceptor } from './helpers/token.interceptor';
+import { HomeRouterComponent } from './pages/routers/home-router/home-router.component';
+import { AuthRouterComponent } from './pages/routers/auth-router/auth-router.component';
+import { CommonModule } from '@angular/common';
+import { AdminComponent } from './pages/admin/admin.component';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
@@ -21,18 +27,24 @@ import { CommentItemComponent } from './pages/comment-item/comment-item.componen
     ChatItemComponent,
     SigninComponent,
     CommentComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    HomeRouterComponent,
+    AuthRouterComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,/* ngModel */
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    MaterialModule,
   ],
   providers: [
     provideClientHydration(),
     HomeService,
-    HttpClient
+    /* HttpClient, */
+    provideHttpClient(withInterceptors([tokenInterceptor])),
   ],
   bootstrap: [AppComponent]
 })

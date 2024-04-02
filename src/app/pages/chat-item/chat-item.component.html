@@ -3,8 +3,9 @@
     <div class="user-info">
       <img src="/assets/img/image1.png" alt="User Logo" class="user-logo" />
       <div class="user-details">
+        <div class="user-name">topicIdFk: {{ itemData.topicIdFk }}</div>
         <div class="user-name">postId: {{ itemData.postId }}</div>
-        <div class="name">name: {{ itemData.firstName }}</div>
+        <div class="name">firstName: {{ itemData.firstName }}</div>
         <div class="username">username: {{ itemData.username }}</div>
         <div class="send-date">
           {{ itemData.createdDate | date : "dd/MM/yyyy HH:mm" }}

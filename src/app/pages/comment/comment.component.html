@@ -17,8 +17,7 @@
       #commentItem
       *ngFor="let itemData of comments"
       [commentItemData]="itemData"
-      [userId]="userId"
-      [userRole]="userRole"
+      [userData]="userData"
       (deleteCommit)="onDeleteCommit($event)"
     ></app-comment-item>
   </div>

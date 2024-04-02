@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarPagesComponent } from './navbar-pages.component';
+import { TopBarDialogComponent } from './top-bar-dialog.component';
 
-describe('NavbarPagesComponent', () => {
-  let component: NavbarPagesComponent;
-  let fixture: ComponentFixture<NavbarPagesComponent>;
+describe('TopBarDialogComponent', () => {
+  let component: TopBarDialogComponent;
+  let fixture: ComponentFixture<TopBarDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NavbarPagesComponent]
+      declarations: [TopBarDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NavbarPagesComponent);
+    fixture = TestBed.createComponent(TopBarDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

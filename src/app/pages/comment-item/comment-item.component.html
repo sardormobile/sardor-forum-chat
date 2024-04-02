@@ -18,8 +18,8 @@
     <div
       class="actions"
       *ngIf="
-        commentItemData.role === currentRole ||
-        commentItemData.userId === userId
+        commentItemData.userId === userData.userId ||
+        userData.role === currentRole
       "
     >
       <!-- <button class="edit-button">Edit</button> -->

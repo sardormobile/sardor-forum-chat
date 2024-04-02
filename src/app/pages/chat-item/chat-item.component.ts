@@ -19,7 +19,6 @@ export class ChatItemComponent {
   userRole: any = null;
 
   currentRole: boolean = false;
-  
 
   ngOnInit() {
     //console.log("chat item userRole: " + this.userRole);

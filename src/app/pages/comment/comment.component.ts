@@ -2,10 +2,12 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ForumCommentApiService } from '../../services/api/forum-comment-api.service';
 import { ForumCommentModel } from '../../services/api/models/forum-comment-model';
-import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_USER_ID_KEY } from '../../constants';
+import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_USER_DATA_KEY } from '../../constants';
 import { JwtDecoderService } from '../../services/jwt-decoder.service';
 import { RegisterApiService } from '../../services/api/register-api.service';
 import { Location } from '@angular/common';
+import { log } from 'console';
+import { UserDataModel } from '../../services/api/models/user-data-model';
 
 @Component({
   selector: 'app-comment',
@@ -28,11 +30,7 @@ export class CommentComponent implements OnInit {
 
   queryParam: string = ''
   
-  @Input()
-  userId: any;
-
-  @Input()
-  userRole: string = '';
+  userData: UserDataModel = {};
 
   inputComment: string = '';
 
@@ -44,9 +42,11 @@ export class CommentComponent implements OnInit {
     this.getAllCommitsByPostId();
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem(LOCAL_STORAGE_KEY);
-      const userIdStoroge = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY);
-      if (userIdStoroge) {
-        this.userId = userIdStoroge;
+
+      const userDataString  = localStorage.getItem(LOCAL_STORAGE_USER_DATA_KEY);
+      if (userDataString !== null) {
+        const userData: UserDataModel = JSON.parse(userDataString);
+        this.userData = userData
       }
       if (token) {
         this.decodetToken = this.jwtDecodeToken.decodeToken(token);
@@ -60,7 +60,7 @@ export class CommentComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if(res.username && res.userId && res.firstName) {
-            this.userId = res.userId;
+            this.userData.userId = res.userId;
           }
         }
       });
@@ -74,13 +74,14 @@ export class CommentComponent implements OnInit {
   onSendClick() {
     const newComment: ForumCommentModel = {
       postId: this.paramPostId,
-      userId: this.userId,
+      userId: this.userData.userId,
       message: this.inputComment
     }
     this.commentApiService.createComment(newComment)
     .subscribe({
       next: (res) => {
         this.comments.push(res);
+        this.getAllCommitsByPostId();
         this.inputComment = '';
       }
     })
