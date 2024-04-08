@@ -6,7 +6,7 @@
           <img src="/assets/img/avatar.png" alt="Avatar" class="avatar" />
         </a>
 
-        <div class="user-details">
+        <div class="user-details" *ngIf="!register_container">
           <div class="first-name">Name:{{ name }}</div>
           <div class="username">Username: {{ username }}</div>
           <div class="userId">UserId: {{ userId }}</div>
@@ -30,7 +30,7 @@
             Delete
           </button>
         </li>
-        <a class="centered">
+        <a class="centered" *ngIf="!register_container">
           <img
             src="/assets/img/add_icon.png"
             mat-raised-button

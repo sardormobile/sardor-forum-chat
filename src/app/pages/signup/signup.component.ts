@@ -3,7 +3,6 @@ import { ForumApiService } from '../../services/api/forum-post-api.service';
 import { UserDataModel } from '../../services/api/models/user-data-model';
 import { Router } from '@angular/router';
 import { RegisterApiService } from '../../services/api/register-api.service';
-import { TopNavBarModel } from '../../services/api/models/TopNavBarModel';
 import { Location } from '@angular/common';
 
 @Component({
@@ -25,6 +24,7 @@ export class SignupComponent {
     private router: Router,
     private location: Location,
   ) {}
+
   onSubmit(): void {
     // Check if any of the fields are empty
     if (!this.username || !this.firstName || !this.lastName || !this.password || !this.confirmPassword) {
@@ -52,7 +52,7 @@ export class SignupComponent {
       .subscribe({
         next: (res) => {
           if (res) {
-            this.loadNavBarItems();
+            this.router.navigate(['register/signin']);
           }
           console.log('SignUp successful:', res);
         },
@@ -61,24 +61,7 @@ export class SignupComponent {
         }
       });
   }
-  loadNavBarItems() {
-    this.forumApiService.getNavBarItems()
-      .subscribe({
-        next: (data) => {
-          if (data && data.length > 0) {
-            const { topic, topicId } = data[0];
-            this.navigateToHome(topic, topicId);
-          }
-        },
-        error: (error) => {
-          console.error('Error fetching navigation bar items:', error);
-        }
-      });
-    }
-    navigateToHome(title: string, titleId: number) {
-      this.router.navigate(['/home', title], { queryParams: { title, titleId } });
-    }
-    goBack() {
-      this.location.back();
-    }
+  goBack() {
+    this.location.back();
+  }
 }
