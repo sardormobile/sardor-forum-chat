@@ -24,7 +24,6 @@ export class CommentItemComponent {
     console.log("coment item commentItemData: " + this.commentItemData.role);
   }
 
-
   @Output()
   deleteCommit: EventEmitter<number> = new EventEmitter<number>(); 
   onDeleteCommit(): void {

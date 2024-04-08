@@ -83,8 +83,8 @@ export class HomeRouterComponent {
     this.registerService.logOut();
     this.router.navigate(['register/signin']);
   }
-  deleteItem(title: string) {
-    this.forumApiService.deleteNavBarItemByIndex(title)
+  deleteItem(titleId: Number) {
+    this.forumApiService.deleteNavBarItemByIndex(titleId)
     .subscribe({
       next: (res) => {
         this.initNavBarItems();

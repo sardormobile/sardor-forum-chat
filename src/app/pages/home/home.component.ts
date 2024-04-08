@@ -9,7 +9,6 @@ import { JwtDecoderService } from '../../services/jwt-decoder.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModel } from '../../services/api/models/user-data-model';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

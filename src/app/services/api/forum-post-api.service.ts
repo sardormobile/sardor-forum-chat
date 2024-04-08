@@ -31,7 +31,7 @@ export class ForumApiService {
   getNavBarItems() {
     return this.http.get<Array<TopNavBarModel>>(NAV_BAR_URL);
   }
-  deleteNavBarItemByIndex(title:string) {
-    return this.http.delete<any>(`${NAV_BAR_URL}/${title}`, {headers: {'Content-Type': 'application/json'}});
+  deleteNavBarItemByIndex(titleId:Number) {
+    return this.http.delete<any>(`${NAV_BAR_URL}/${titleId}`, {headers: {'Content-Type': 'application/json'}});
   }
 }

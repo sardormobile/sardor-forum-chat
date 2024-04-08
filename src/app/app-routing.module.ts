@@ -14,10 +14,6 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: "posts/:postId",
-    component: CommentComponent
-  },
-  {
     path: "",
     component: HomeRouterComponent, children: [
         {
@@ -34,10 +30,10 @@ const routes: Routes = [
           path: 'home/:pageArg',
           component: HomeComponent
         },
-        /* {
-          path: 'home/:pageArg',
-          component: NavbarPagesComponent
-        }, */
+        {
+          path: "posts/:postId",
+          component: CommentComponent
+        },
     ]
   },
   {

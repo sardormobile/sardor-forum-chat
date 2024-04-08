@@ -23,7 +23,7 @@
             {{ itemData.topic }}
           </a>
           <button
-            (click)="deleteItem(itemData.topic)"
+            (click)="deleteItem(itemData.topicId)"
             *ngIf="isDelete && i != 0"
             class="delete-button"
           >
